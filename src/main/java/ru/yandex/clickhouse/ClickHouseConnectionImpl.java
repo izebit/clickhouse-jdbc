@@ -378,6 +378,7 @@ public class ClickHouseConnectionImpl implements ClickHouseConnection {
             Statement statement = createClickHouseStatement(client);
             statement.execute("SELECT 1");
             statement.close();
+            client.close();
             return true;
         } catch (Exception e) {
             boolean isFailOnConnectionTimeout = e.getCause() instanceof ConnectTimeoutException;
