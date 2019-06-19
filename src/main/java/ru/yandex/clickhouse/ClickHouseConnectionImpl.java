@@ -375,7 +375,8 @@ public class ClickHouseConnectionImpl implements ClickHouseConnection {
             ClickHouseProperties properties = new ClickHouseProperties(this.properties);
             properties.setConnectionTimeout((int) TimeUnit.SECONDS.toMillis(timeout));
             CloseableHttpClient client = new ClickHouseHttpClientBuilder(properties).buildClient();
-            Statement statement = createClickHouseStatement(client);
+            Statement statement = createStatement();
+            statement.setQueryTimeout(timeout);
             statement.execute("SELECT 1");
             statement.close();
             client.close();
